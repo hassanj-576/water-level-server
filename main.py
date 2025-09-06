@@ -41,7 +41,7 @@ async def store_water_level(value_data: ValueModel, auth: bool = Depends(auth_re
 
 
 @app.get("/water-level")
-async def get_water_level():
+async def get_water_level(auth: bool = Depends(auth_required)):
     value = read_data()
     if value is None:
         raise HTTPException(status_code=404, detail="No water level data found")
