@@ -6,7 +6,7 @@ from auth import auth_required
 
 app = FastAPI()
 
-DATA_FILE = "data.json"
+DATA_FILE = "data/data.json"
 
 
 class ValueModel(BaseModel):
@@ -25,6 +25,7 @@ def read_data():
 
 
 def write_data(value: float):
+    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
     with open(DATA_FILE, 'w') as f:
         json.dump({'value': value}, f)
 
